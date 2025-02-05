@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         DataFragment dataFragment = new DataFragment();
 
         getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
                 .replace(R.id.fragment_container_view, dataFragment)
+                .setReorderingAllowed(true)
                 .commit();
     }
 }
