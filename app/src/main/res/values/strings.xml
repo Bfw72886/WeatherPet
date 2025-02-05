@@ -3,4 +3,5 @@
     <string name="updateBtn">Update</string>
     <string name="weatherHeader">Weather</string>
     <string name="switchBtn">Switch</string>
+    <string name="fragment_data_text">Hello, here\'s the fragment_data.xml text!</string>
 </resources>
