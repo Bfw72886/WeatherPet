@@ -1,6 +1,8 @@
 package com.brian.weatherpet;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+    Button switchBtn;
+    DataFragment dataFragment;
+    PetFragment petFragment;
+
+    String currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +28,34 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        DataFragment dataFragment = new DataFragment();
+        dataFragment = new DataFragment();
+        petFragment = new PetFragment();
+        switchBtn = findViewById(R.id.switchBtn);
+        currentFragment = "dataFragment";
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container_view, dataFragment)
                 .setReorderingAllowed(true)
+                .replace(R.id.fragment_container_view, dataFragment)
                 .commit();
+
+        switchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentFragment.equals("dataFragment")) {
+                    getSupportFragmentManager().beginTransaction()
+                            .setReorderingAllowed(true)
+                            .replace(R.id.fragment_container_view, petFragment)
+                            .commit();
+                    currentFragment = "petFragment";
+                } else if (currentFragment.equals("petFragment")) {
+                    getSupportFragmentManager().beginTransaction()
+                            .setReorderingAllowed(true)
+                            .replace(R.id.fragment_container_view, dataFragment)
+                            .commit();
+                    currentFragment = "dataFragment";
+                }
+
+            }
+        });
     }
 }
